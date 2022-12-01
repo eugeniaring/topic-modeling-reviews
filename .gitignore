@@ -128,5 +128,6 @@ dmypy.json
 # Pyre type checker
 .pyre/
 /model
+/data
 /processed_data
 /raw_data
