@@ -57,3 +57,11 @@ dvc remote modify origin --local auth basic
 dvc remote modify origin --local user <username>
 dvc remote modify origin --local password <password> 
 ```
+
+Commit and push code to remote the server
+
+```
+git add .
+git commit -m "Initialized project"
+git push -u origin main
+```
