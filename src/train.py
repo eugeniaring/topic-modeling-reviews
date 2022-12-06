@@ -6,7 +6,7 @@ import mlflow
 from dagshub import dagshub_logger
 from dagshub.streaming import install_hooks
 
-from process_data import read_yaml
+from process_data import read_yaml,delete_stopwords
 from topic_model import train_bert, load_bert, visualize_topics
 
 if __name__ == "__main__":
@@ -20,24 +20,20 @@ if __name__ == "__main__":
     with open(params['young_path']) as pd_file:
         df_young = pd.read_csv(pd_file,index_col=0)
     pd_file.close()
-    mlflow.set_tracking_uri(params['mlflow_url'])
-    os.environ['MLFLOW_TRACKING_USERNAME'] = params['MLFLOW_TRACKING_USERNAME']
-    os.environ['MLFLOW_TRACKING_PASSWORD'] = params['MLFLOW_TRACKING_PASSWORD']
-    docs = df_young['Review Text'].values.tolist() 
 
+    docs = df_young['Review Text'].values.tolist() 
+    print(docs[0])
     with open('output/docs.pkl', 'wb') as f:
         pickle.dump(docs, f)
     f.close()
 
-    with mlflow.start_run():
-        print('Start training!')
-        if params['model_already_trained']==False:
-            topic_model = train_bert(docs,params['model_path'])
-        else:
-            topic_model = load_bert(params['model_path'])
-        print('End training!')
-        print(topic_model.get_topic_freq().head())
-
+    print('Start training!')
+    if params['model_already_trained']==False:
+        topic_model = train_bert(docs,params['model_path'])
+    else:
+        topic_model = load_bert(params['model_path'])
+    print('End training!')
+    print(topic_model.get_topic_freq().head())
 
 
 

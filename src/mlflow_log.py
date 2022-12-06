@@ -18,6 +18,11 @@ if __name__ == "__main__":
     os.environ['MLFLOW_TRACKING_USERNAME'] = params['MLFLOW_TRACKING_USERNAME']
     os.environ['MLFLOW_TRACKING_PASSWORD'] = params['MLFLOW_TRACKING_PASSWORD']
 
+    _ = mlflow.create_experiment("topic_modeling")
+
     with mlflow.start_run():
+        with dagshub_logger() as logger:
+            logger.log_hyperparams({"model_name": 'BERTopic'})
+
         for html_path in l_html:
             mlflow.log_artifact('output/'+html_path)
