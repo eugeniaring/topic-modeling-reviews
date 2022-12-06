@@ -1,0 +1,39 @@
+stages:
+  prepare_data:
+    cmd: python src/process_data.py
+    deps:
+    - data/raw_data
+    outs:
+    - data/processed_data:
+        persist: true
+  topic_modeling:
+    cmd: python src/train.py
+    deps:
+    - src/topic_model.py
+    - data/processed_data
+    - src/config.yaml
+    outs:
+    - model/bert_model:
+        persist: true    
+    metrics:
+    - metrics.csv:
+        persist: true
+  display_topics:
+    cmd: python src/mlflow_log.py
+    deps:
+    - src/process_data.py
+    - src/topic_model.py
+    - src/visualization.py
+    - model/bert_model
+    - src/config.yaml
+    outs:
+    - output/intertopic_dist_map.html:
+        persist: true    
+    - output/barchart.html:
+        persist: true   
+    - output/projections.html:
+        persist: true   
+    - output/hieararchy.html:
+        persist: true 
+    - output/heatmap.html:
+        persist: true         

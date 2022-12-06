@@ -1,0 +1,68 @@
+schema: '2.0'
+stages:
+  prepare_data:
+    cmd: python src/process_data.py
+    deps:
+    - path: data/raw_data
+      md5: b1b87096562280de2021a4f62882153a.dir
+      size: 8483448
+      nfiles: 1
+    outs:
+    - path: data/processed_data
+      md5: 0ffe63ba51cc42f48e443a34239822b0.dir
+      size: 11217918
+      nfiles: 2
+  topic_modeling:
+    cmd: python src/train.py
+    deps:
+    - path: data/processed_data
+      md5: 0ffe63ba51cc42f48e443a34239822b0.dir
+      size: 11222201
+      nfiles: 2
+    - path: src/config.yaml
+      md5: d9cbc7cbd5cbd440c43f706b5837b885
+      size: 440
+    - path: src/topic_model.py
+      md5: c1217fd382f8f0e4047bca34076fb9b2
+      size: 2787
+    outs:
+    - path: metrics.csv
+      md5: f0c89a07561ca8aea8ab3f4764b648e7
+      size: 26
+    - path: model/bert_model
+      md5: 127b147391d4fa2d94f7a9cff8f881a8
+      size: 146281222
+  display_topics:
+    cmd: python src/mlflow_log.py
+    deps:
+    - path: model/bert_model
+      md5: 127b147391d4fa2d94f7a9cff8f881a8
+      size: 146281222
+    - path: src/config.yaml
+      md5: d9cbc7cbd5cbd440c43f706b5837b885
+      size: 440
+    - path: src/process_data.py
+      md5: 21a5123ec80ea3027aeb8d64d5583867
+      size: 1132
+    - path: src/topic_model.py
+      md5: c1217fd382f8f0e4047bca34076fb9b2
+      size: 2787
+    - path: src/visualization.py
+      md5: 457c4b6aeb1b1b1b18e7cc0a6252bee2
+      size: 459
+    outs:
+    - path: output/barchart.html
+      md5: b9175f2891f117410b7119a105ffc62c
+      size: 3725384
+    - path: output/heatmap.html
+      md5: 7fbcf56257cd8e004f7af0e5d5092ae8
+      size: 3740979
+    - path: output/hieararchy.html
+      md5: 73928340f7bd8b947a3b0ab50922d5a2
+      size: 3727544
+    - path: output/intertopic_dist_map.html
+      md5: 63bc2cb3fe6e772c7b7ba5423dfe51d0
+      size: 3737472
+    - path: output/projections.html
+      md5: 9cf95eef8cf426f7ab5d266a1821157f
+      size: 6351358
