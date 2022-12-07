@@ -35,4 +35,5 @@ jobs:
         run: |
           cml ci
           pip install -r requirements.txt
+          python src/process_data.py
           python src/train.py         
