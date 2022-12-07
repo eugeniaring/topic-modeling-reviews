@@ -33,7 +33,9 @@ jobs:
         env:
           REPO_TOKEN: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
         run: |
-          cml ci
+          cml repo prepare
+          python3 -m venv venv
+          source venv/bin/activate
           pip install -r requirements.txt
           python src/process_data.py
           python src/train.py         
