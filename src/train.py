@@ -6,7 +6,7 @@ import mlflow
 from dagshub import dagshub_logger
 from dagshub.streaming import install_hooks
 
-from process_data import read_yaml,delete_stopwords
+from process_data import read_yaml
 from topic_model import train_bert, load_bert, visualize_topics
 
 if __name__ == "__main__":
@@ -14,7 +14,6 @@ if __name__ == "__main__":
     params = read_yaml()
     # Install hooks
     install_hooks(repo_url='https://dagshub.com/eugenia.anello/topic-modeling-reviews')
-    
     # remove data from local PC: rm -r data
     print('Load data from remote!')
     with open(params['young_path']) as pd_file:
