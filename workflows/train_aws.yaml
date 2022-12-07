@@ -1,3 +1,4 @@
+
 name: Training on EC2 selfhosted Runner
 on: [push, pull_request]
 
@@ -7,11 +8,11 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - uses: iterative/setup-cml@v1
-      - name: Runner deployment on EC2
+      - name: Runner deployment on EC2 # (1.1) Start the deployment
         env:
           REPO_TOKEN: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
-          AWS_ACCESS_KEY_ID: ${{ secrets.ACCESS_KEY_ID }}
-          AWS_SECRET_ACCESS_KEY: ${{ secrets.SECRET_ACCESS_KEY }}
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         run: |
           cml runner \
               --cloud=aws \
@@ -20,8 +21,8 @@ jobs:
               --labels=cml-runner
 
   train-model: # (2) Training of the model 
-    needs: deploy-runner
-    runs-on: [cml-runner]
+    needs: deploy-runner 
+    runs-on: [cml-runner] # (2.1) Specify the machine to use for training
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-python@v2
@@ -34,11 +35,10 @@ jobs:
         env:
           REPO_TOKEN: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
         run: |
-          cml ci
           pip install -r requirements.txt
-          python train_model.py
-
-  save_metadata: # (3) Push the metadata to DVC
-    steps:
-      - name: Save metadata into DVC
-        run: python save_metadata.py
+          python src/train.py
+          
+   save_metadata: # (3) Save metadata to DVC
+     steps:
+       - name: Save metadata into DVC
+         run: python save_metadata.py 
