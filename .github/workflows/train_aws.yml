@@ -21,7 +21,6 @@ jobs:
   train-model: # (2) Training of the model 
     needs: deploy-runner 
     runs-on: [cml-runner] # (2.1) Specify the machine to use for training
-    timeout-minutes: 30 
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-python@v2
