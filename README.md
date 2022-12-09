@@ -13,3 +13,16 @@ The article with the explanations is [Topic Modeling for E-commerce Reviews usin
 * [DVC](https://dvc.org/)
 * [DagsHub](https://dagshub.com/)
 * [MLflow](https://mlflow.org/)
+
+## Project Structure
+
+* ```ecg_data/```: contains all the data
+    *```raw_data/```: contains original data
+    *```processed_data/```: contained processed data
+* ```model/```: contains artifact of BERTopic model
+* ```output/```: contains the plots generated with BERTopic model
+* ```src```: contains the following scripts
+    * ```train.py```: Python script to train BERTopic model and save artifact
+    * ```mlflow_log.py```: Python script to track the experiments of the ML model
+    * ```topic_model.py```: Python script to create BERTopic model
+    * ```process_data.py```: Python script to clean and filter the data
