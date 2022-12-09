@@ -16,9 +16,9 @@ The article with the explanations is [Topic Modeling for E-commerce Reviews usin
 
 ## Project Structure
 
-* ```ecg_data/```: contains all the data
-    *```raw_data/```: contains original data
-    *```processed_data/```: contained processed data
+* ```data/```: contains all the data
+    * ```raw_data/```: contains original data
+    * ```processed_data/```: contained processed data
 * ```model/```: contains artifact of BERTopic model
 * ```output/```: contains the plots generated with BERTopic model
 * ```src```: contains the following scripts
