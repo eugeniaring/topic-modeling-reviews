@@ -1,6 +1,6 @@
 import pickle
 from process_data import read_yaml
-from topic_model import train_bert, load_bert, visualize_topics
+from topic_model import load_bert, visualize_topics
 
 if __name__ == "__main__":
     
@@ -11,5 +11,5 @@ if __name__ == "__main__":
     topic_model = load_bert(params['model_path'])
     print(topic_model.get_topic_freq().head())
     print('Create visualizations!')
-   #  visualize_topics(topic_model,docs)
+    visualize_topics(topic_model,docs)
     print('End!')

@@ -4,9 +4,7 @@ from sklearn.feature_extraction.text import CountVectorizer
 from sentence_transformers import SentenceTransformer
 from hdbscan import HDBSCAN
 import nltk.stem
-
-import mlflow
-from dagshub import dagshub_logger
+import joblib
 
 english_stemmer = nltk.stem.SnowballStemmer('english') 
 class StemmedCountVectorizer(CountVectorizer):
@@ -38,28 +36,40 @@ def train_bert(docs,model_path):
 
     # Fit the model on a corpus
     topics, probs = topic_model.fit_transform(docs)
-    topic_model.save(model_path)
+    #topic_model.save(model_path)
+    joblib.dump(topic_model,'model/bert_model.pkl')
     return topic_model
 
 def load_bert(model_path):
     topic_model = BERTopic.load(model_path)
     return topic_model
 
-def visualize_topics(model,docs):
+def visualize_topics(model,docs,show_plot=False):
     # Save intertopic distance map as HTML file
-    model.visualize_topics().write_html("output/intertopic_dist_map.html")
-    # mlflow.log_artifact("output/intertopic_dist_map.html")
+    fig1 = model.visualize_topics()
+    if show_plot == True:
+        fig1.show()
+    fig1.write_html("output/intertopic_dist_map.html")
 
     # Save topic-terms barcharts as HTML file
-    model.visualize_barchart(top_n_topics = 10).write_html("output/barchart.html")
-    # mlflow.log_artifact("output/barchart.html")
+    fig2 = model.visualize_barchart(top_n_topics = 10)
+    if show_plot == True:
+        fig2.show()
+    fig2.write_html("output/barchart.html")
 
     # Save documents projection as HTML file
-    model.visualize_documents(docs).write_html("output/projections.html")
-    # mlflow.log_artifact("output/projections.html")
+    fig3 = model.visualize_documents(docs)
+    if show_plot == True:
+        fig3.show()
+    fig3.write_html("output/projections.html")
 
     # Save topics dendrogram as HTML file
-    model.visualize_hierarchy().write_html("output/hieararchy.html") 
-    # mlflow.log_artifact("output/hieararchy.html")   
+    fig4 = model.visualize_hierarchy()
+    if show_plot == True:
+        fig4.show()
+    fig4.write_html("output/hierarchy.html")
 
-    model.visualize_heatmap(n_clusters=10, width=1000, height=1000).write_html("output/heatmap.html") 
+    fig5 = model.visualize_heatmap(n_clusters=10, width=1000, height=1000)
+    if show_plot == True:
+        fig5.show()
+    fig5.write_html("output/heatmap.html")

@@ -1,13 +1,9 @@
 import pandas as pd
-import os
 import pickle
-
-import mlflow
-from dagshub import dagshub_logger
 from dagshub.streaming import install_hooks
 
 from process_data import read_yaml
-from topic_model import train_bert, load_bert, visualize_topics
+from topic_model import train_bert, load_bert
 
 if __name__ == "__main__":
 
