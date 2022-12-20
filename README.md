@@ -26,3 +26,33 @@ The article with the explanations is [Topic Modeling for E-commerce Reviews usin
     * ```mlflow_log.py```: Python script to track the experiments of the ML model
     * ```topic_model.py```: Python script to create BERTopic model
     * ```process_data.py```: Python script to clean and filter the data
+    
+ ## Visualize Topics
+ 
+```python
+topic_model.visualize_topics()
+```
+ 
+ ![](images/bubols.gif)
+ 
+ ```python
+topic_model.visualize_barchart(top_n_topics = 10)
+```
+ ![](images/topic_word_barplots.png)
+ 
+ ```python
+topic_model.visualize_documents(docs)
+```
+ ![](images/clustertopics.gif)
+ 
+ ```python
+topic_model.visualize_hierarchy()
+```
+ ![](images/hierarchical_cluster.png)
+ 
+ ```python
+topic_model.visualize_heatmap(n_clusters=10, width=1000, height=1000)
+```
+ ![](images/sim_matrix.png)
+
+
