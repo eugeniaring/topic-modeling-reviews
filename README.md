@@ -52,6 +52,7 @@ topic_model.visualize_hierarchy()
  ```python
 topic_model.visualize_heatmap(n_clusters=10, width=1000, height=1000)
 ```
+ 
  ![](images/sim_matrix.png)
 
 
