@@ -36,8 +36,7 @@ def train_bert(docs,model_path):
 
     # Fit the model on a corpus
     topics, probs = topic_model.fit_transform(docs)
-    #topic_model.save(model_path)
-    joblib.dump(topic_model,'model/bert_model.pkl')
+    topic_model.save(model_path)
     return topic_model
 
 def load_bert(model_path):
