@@ -32,8 +32,7 @@ The article with the explanations is [Topic Modeling for E-commerce Reviews usin
 ```python
 topic_model.visualize_topics()
 ```
- 
- ![](images/bubols.gif)
+ ![](images/intertopic_dist_map.html)
  
  ```python
 topic_model.visualize_barchart(top_n_topics = 10)
