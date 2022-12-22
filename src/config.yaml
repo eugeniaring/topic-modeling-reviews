@@ -12,7 +12,7 @@ MLFLOW_TRACKING_PASSWORD: bd3592a38029adedb7da200ee3281176919c5d18
 DAGSHUB_REMOTE_URL: https://dagshub.com/eugenia.anello/topic-modeling-reviews
 DVC_REMOTE_URL: https://dagshub.com/eugenia.anello/topic-modeling-reviews.dvc
 
-model_already_trained: False
+model_already_trained: True
 visualization_over: False
 
 credentials: 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
