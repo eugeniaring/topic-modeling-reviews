@@ -6,7 +6,7 @@ In this project, we are going to train the BERTopic model to identify topics fro
 
 ## Detailed description of the project
 
-The article with the explanations is [Topic Modeling for E-commerce Reviews using BERTopic]().
+The article with the explanations is [Topic Modeling for E-commerce Reviews using BERTopic](https://pub.towardsai.net/topic-modeling-for-e-commerce-reviews-using-bertopic-b1b9e85c710b?sk=ee49a5935cb0a4945492f7d7cf69a353).
 
 ## Tools used in the project
 
